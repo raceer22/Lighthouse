@@ -4,7 +4,11 @@
 Every single light in the scene in one panel, with bulk intensity, solo and mute controls, and presets.
 </p>
 
-[![Download](https://img.shields.io/badge/Download-Lighthouse-blue?style=for-the-badge&logo=blender)](https://github.com/raceer22/lighthouse/archive/refs/heads/master.zip)
+<p align="center">
+  <a href="https://github.com/raceer22/lighthouse/archive/refs/heads/master.zip">
+    <img alt="Download" src="https://img.shields.io/badge/Download-Lighthouse-blue?style=for-the-badge&logo=blender">
+  </a>
+</p>
 
 
 ## Why Lighthouse
