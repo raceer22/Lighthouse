@@ -1,0 +1,33 @@
+name: Create Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Blender
+        run: sudo snap install blender --classic
+
+      - name: Check tag matches manifest version
+        run: |
+          v=$(sed -n 's/^version = "\(.*\)"/\1/p' lighthouse/blender_manifest.toml)
+          [ "v$v" = "${{ github.ref_name }}" ] || { echo "Tag ${{ github.ref_name }} != manifest v$v"; exit 1; }
+
+      - name: Build
+        run: make build
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ github.ref_name }}" dist/*.zip \
+            --title "${{ github.ref_name }}" \
+            --generate-notes
